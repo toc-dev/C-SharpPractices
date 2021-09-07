@@ -27,7 +27,7 @@ namespace WebUI.domain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDBConnection(Configuration);
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
