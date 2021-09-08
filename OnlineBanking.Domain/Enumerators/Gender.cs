@@ -8,5 +8,7 @@ namespace OnlineBanking.Domain.Enumerators
     {
         Male,
         Female,
+        PreferNotToSay
+
     }
 }
