@@ -15,6 +15,7 @@ namespace WebUI.domain.Middlewares
         public static IServiceCollection AddDBConnection(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("OBConnection");
+            Console.WriteLine(connectionString);
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("OBConnection")));
 
