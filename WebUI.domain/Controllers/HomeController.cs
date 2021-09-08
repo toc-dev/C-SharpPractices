@@ -15,11 +15,10 @@ namespace WebUI.domain.Controllers
         {
             return View();
         }
-
-        [HttpPost]
+        
         public ViewResult CustomerForm()
         {
-            return View("CustomerForm");
+            return View();
         }
     }
 }
