@@ -38,7 +38,8 @@ namespace WebUI.Domain.Services
                 FirstName = $"{model.FirstName}",
                 LastName = $"{model.LastName}",
                 Gender = model.Gender,
-                Age = model.Age,
+                Birthday = model.Birthday,
+                Age = DateTime.Now.Year - model.Birthday.Year,
                 Country = $"{model.Country}",
                 Account = new Account
                 {
@@ -57,6 +58,7 @@ namespace WebUI.Domain.Services
             return customer;
         }
 
+        public Account Account { get; set; }
         public int Update(UpdateViewModel model, int Id)
         {
             int updatedRow = 0;
