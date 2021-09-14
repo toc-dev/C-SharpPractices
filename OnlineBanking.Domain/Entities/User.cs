@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineBanking.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OnlineBanking.Domain.Entities
 {
-   public class User
+    public class User : IdentityUser, IEntity
     {
-        public int Id { get; set; }
+        public string FullName { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
+
 }

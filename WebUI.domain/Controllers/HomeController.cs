@@ -25,17 +25,7 @@ namespace WebUI.domain.Controllers
         }
 
         [HttpPost]
-        public ViewResult CustomerForm(CreateCustomerViewModel model)
-        {
-            
-            var customerService = new CustomerService(new UnitOfWork(new AppDbContext()));
-
-            if (ModelState.IsValid)
-            {
-                customerService.CreateCustomer(model);
-                return View("index");
-            }
-            return View();
+        
         }
     }
 }
