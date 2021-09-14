@@ -1,11 +1,11 @@
 ﻿using OnlineBanking.Domain.Entities;
-using OnlineBanking.Domain.Interfaces.Repositories;
+using WebUI.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineBanking.Domain.Interfaces
+namespace WebUI.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

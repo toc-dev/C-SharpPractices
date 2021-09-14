@@ -12,10 +12,12 @@ using Microsoft.Extensions.Configuration;
 using OnlineBanking.Domain.Entities;
 using OnlineBanking.Domain.Interfaces;
 using OnlineBanking.Domain.UnitOfWork;
-using OnlineBanking.Domain.Interfaces.Repositories;
+using WebUI.Domain.Interfaces.Repositories;
 using OnlineBanking.Domain.Repositories;
+using WebUI.Domain.Interfaces.Services;
 using WebUI.Domain.Services;
 using Microsoft.AspNetCore.Identity;
+using WebUI.Domain.Interfaces;
 
 namespace WebUI.domain
 {
