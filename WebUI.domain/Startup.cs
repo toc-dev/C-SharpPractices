@@ -27,7 +27,8 @@ namespace WebUI.domain
             services.AddDBConnection(Configuration);
 
             services.AddControllersWithViews();
-           
+
+            services.AddScoped<DbContext, AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
