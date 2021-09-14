@@ -17,7 +17,7 @@ namespace WebUI.domain.Middlewares
             var connectionString = configuration.GetConnectionString("OBConnection");
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("OBConnection")));
-
+            
             return services;
         }
     }
