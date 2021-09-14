@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OnlineBanking.Domain.Interfaces.Repositories
+namespace WebUI.Domain.Interfaces.Repositories
 {
     public interface ICustomerRepository : IRepository<Customer>
     {

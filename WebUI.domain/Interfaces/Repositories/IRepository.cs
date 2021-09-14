@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace OnlineBanking.Domain.Interfaces.Repositories
+namespace WebUI.Domain.Interfaces.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
