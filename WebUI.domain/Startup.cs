@@ -35,9 +35,10 @@ namespace WebUI.domain
                 options.UseSqlServer(Configuration.GetConnectionString("OBConnection")));
 
             services.AddControllersWithViews();
+
             services.AddScoped<DbContext, ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<ICustomerRepository, CustomerRepository>();
             //services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddIdentity<User, IdentityRole>(options =>
