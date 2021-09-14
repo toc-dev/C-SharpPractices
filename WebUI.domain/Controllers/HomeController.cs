@@ -24,8 +24,6 @@ namespace WebUI.domain.Controllers
             return View();
         }
 
-        [HttpPost]
         
-        }
     }
 }
