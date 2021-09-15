@@ -43,7 +43,7 @@ namespace WebUI.Domain.Services
                 Country = $"{model.Country}",
                 Account = new Account
                 {
-                    AccountNumber = $"{RandomNumberGenerator.GetInt32(999999999)}",
+                    //AccountNumber = $"{RandomNumberGenerator.GetInt32(999999999)}",
                     CreatedAt = DateTime.Now,
                     CreatedBy = $"{model.CreatedBy}",
                     Balance = model.Balance,
