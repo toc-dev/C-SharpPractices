@@ -1,33 +1,51 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineBanking.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.domain.Model;
-using WebUI.Domain.Repositories;
 
 namespace WebUI.domain.Controllers
 {
     public class AccountController : Controller
     {
-        [HttpGet]
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
         public ViewResult SignUp()
         {
             return View();
         }
 
+        public ViewResult LogIn()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public ViewResult SignUp(RegisterViewModel registerUser)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(LogInViewModel model)
         {
             if (ModelState.IsValid)
             {
-                AccountRepository.Add(registerUser);
-                return View("Thanks", registerUser);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
     }
 }
