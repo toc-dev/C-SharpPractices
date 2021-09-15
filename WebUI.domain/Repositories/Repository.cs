@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.Domain.Interfaces.Repositories;
 
-namespace OnlineBanking.Domain.Repositories
+namespace WebUI.Domain.Repositories
 {
      public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
      {
