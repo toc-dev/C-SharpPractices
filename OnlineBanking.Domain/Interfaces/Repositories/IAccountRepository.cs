@@ -1,11 +1,11 @@
-﻿using OnlineBanking.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OnlineBanking.Domain.Entities;
 
 namespace OnlineBanking.Domain.Interfaces.Repositories
 {
-    public interface ICustomerRepository : IRepository<Customer>
+   public interface IAccountRepository: IRepository<Account>
     {
     }
 }

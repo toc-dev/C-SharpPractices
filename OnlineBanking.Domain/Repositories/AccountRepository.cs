@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using OnlineBanking.Domain.Entities;
-using WebUI.domain.Interfaces.Repositories;
+using OnlineBanking.Domain.Interfaces.Repositories;
 
 namespace OnlineBanking.Domain.Repositories
 {
