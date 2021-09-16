@@ -9,8 +9,8 @@ namespace OnlineBanking.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Account> Accounts { get; }
-        IRepository<Customer> Customers { get; }
+        //IRepository<Account> Accounts { get; }
+        //IRepository<Customer> Customers { get; }
         Task<int> CommitAsync();
         int Commit();
     }

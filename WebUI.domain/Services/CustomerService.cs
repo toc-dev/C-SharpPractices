@@ -10,7 +10,7 @@ namespace WebUI.Domain.Services
 {
     public class CustomerService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        /*private readonly IUnitOfWork _unitOfWork;
 
         public CustomerService(IUnitOfWork unitOfWork)
         {
@@ -67,6 +67,6 @@ namespace WebUI.Domain.Services
             customer.LastName = model.LastName ??= customer.LastName;
             updatedRow = _unitOfWork.Commit();
             return updatedRow;
-        }
+        }*/
     }
 }
