@@ -4,15 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace OnlineBanking.Domain.Entities
 {
   public  class Customer : IEntity
-  {
+  {       
         public int Id { get; set; }
-
-        [MaxLength(20)]
-        [MinLength(4)]
+        public string UserId { get; set; }
+        public User User { get; set; }
+     
         public string FirstName { get; set; }
 
         [MaxLength(20)]
@@ -26,7 +28,9 @@ namespace OnlineBanking.Domain.Entities
         public DateTime UpdatedAt { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
+        public Guid AccountId { get; set; }    
+        public Account Account { get; set; }       
+        public bool DefaultPassword { get; set; } = true;
 
-        public Account Account { get; set; }
-  }
+    }
 }

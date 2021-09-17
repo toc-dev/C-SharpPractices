@@ -58,7 +58,7 @@ namespace WebUI.domain.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("index", "Home");
+                    return RedirectToAction("index", "Home"); 
                 }
 
                 foreach (var error in result.Errors)

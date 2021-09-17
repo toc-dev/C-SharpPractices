@@ -30,9 +30,8 @@ namespace OnlineBanking.Domain.Entities
 
         public string CreatedBy { get; set; }
 
-        public string UpdatedBy { get; set; }
-
-
+        public string UpdatedBy { get; set; }           
+               
     }
 
 }

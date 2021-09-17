@@ -185,15 +185,12 @@ namespace OnlineBanking.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
-
                     b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("OnlineBanking.Domain.Entities.Address", b =>
                 {
-                    b.Property<int>("AddressId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -208,9 +205,6 @@ namespace OnlineBanking.Domain.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PlotNo")
                         .HasColumnType("int");
 
@@ -224,9 +218,7 @@ namespace OnlineBanking.Domain.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("AddressId");
-
-                    b.HasIndex("CustomerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
@@ -237,6 +229,12 @@ namespace OnlineBanking.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId1")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -253,9 +251,11 @@ namespace OnlineBanking.Domain.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("DefaultPassword")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FirstName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -270,7 +270,14 @@ namespace OnlineBanking.Domain.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId1");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
                 });
@@ -411,24 +418,19 @@ namespace OnlineBanking.Domain.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OnlineBanking.Domain.Entities.Account", b =>
+            modelBuilder.Entity("OnlineBanking.Domain.Entities.Customer", b =>
                 {
-                    b.HasOne("OnlineBanking.Domain.Entities.Customer", null)
-                        .WithOne("Account")
-                        .HasForeignKey("OnlineBanking.Domain.Entities.Account", "CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OnlineBanking.Domain.Entities.Address", b =>
-                {
-                    b.HasOne("OnlineBanking.Domain.Entities.Customer", "Customers")
+                    b.HasOne("OnlineBanking.Domain.Entities.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AccountId1");
 
-                    b.Navigation("Customers");
+                    b.HasOne("OnlineBanking.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Account");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OnlineBanking.Domain.Entities.User", b =>
@@ -440,11 +442,6 @@ namespace OnlineBanking.Domain.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("OnlineBanking.Domain.Entities.Customer", b =>
-                {
-                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }

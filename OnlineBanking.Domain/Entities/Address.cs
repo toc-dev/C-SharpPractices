@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace OnlineBanking.Domain.Entities
 {
     public class Address
     {
-        public int AddressId { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         public int PlotNo { get; set; }
@@ -23,10 +25,7 @@ namespace OnlineBanking.Domain.Entities
 
         [Required, MaxLength(30), MinLength(3)]
         public string Country { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public Customer Customers { get; set; }
+                
     }
 
 }
