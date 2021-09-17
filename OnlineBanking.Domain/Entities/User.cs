@@ -2,6 +2,7 @@
 using OnlineBanking.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace OnlineBanking.Domain.Entities
@@ -13,6 +14,9 @@ namespace OnlineBanking.Domain.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
+        [ForeignKey("Address")]
+        public int AddressID { get; set; }
+        public Address Address { get; set; }
     }
 
 }

@@ -22,7 +22,7 @@ namespace OnlineBanking.Domain.Entities
         public string State { get; set; }
 
         [Required, MaxLength(30), MinLength(3)]
-        public string Nationality { get; set; }
+        public string Country { get; set; }
 
         public int CustomerId { get; set; }
 

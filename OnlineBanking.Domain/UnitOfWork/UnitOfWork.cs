@@ -1,7 +1,7 @@
 ﻿using OnlineBanking.Domain.Entities;
 using OnlineBanking.Domain.Interfaces;
 using OnlineBanking.Domain.Interfaces.Repositories;
-using WebUI.Domain.Repositories;
+using OnlineBanking.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
