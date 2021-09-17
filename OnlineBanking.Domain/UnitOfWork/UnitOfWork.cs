@@ -1,6 +1,7 @@
 ﻿using OnlineBanking.Domain.Entities;
 using OnlineBanking.Domain.Interfaces;
 using OnlineBanking.Domain.Interfaces.Repositories;
+using WebUI.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,8 +18,8 @@ namespace OnlineBanking.Domain.UnitOfWork
         }
         private IRepository<Customer> _customers;
         private IRepository<Account> _accounts;
-        //public IRepository<Customer> Customers { get { return _customers ??= _customers = new CustomerRepository(_context); } }
-        //public IRepository<Account> Accounts { get { return _accounts ??= _accounts = new AccountRepository(_context); } }
+        public IRepository<Customer> Customers { get { return _customers ??= _customers = new CustomerRepository(_context); } }
+        public IRepository<Account> Accounts { get { return _accounts ??= _accounts = new AccountRepository(_context); } }
 
         public int Commit()
         {
