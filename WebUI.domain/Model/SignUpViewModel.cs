@@ -1,4 +1,5 @@
-﻿using OnlineBanking.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineBanking.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,7 @@ namespace WebUI.domain.Model
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress]
+        [Remote(action: "IsEmailUsed", controller: "Account")]
         public string Email { get; set; }
 
         [Required]
