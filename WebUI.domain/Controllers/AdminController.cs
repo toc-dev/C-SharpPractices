@@ -14,7 +14,6 @@ namespace WebUI.domain.Controllers
     public class AdminController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
-        private readonly AppRole _role = new AppRole();
 
         public AdminController(RoleManager<AppRole> roleManager)
         {
@@ -25,23 +24,32 @@ namespace WebUI.domain.Controllers
         [HttpGet]
         public IActionResult CreateRole()
         {
-            
-            return View();     
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
             if (ModelState.IsValid)
-                _role.Name = model.RoleName;
-            var result = await _roleManager.CreateAsync(_role);
-            if (result.Succeeded)
-                return RedirectToAction("index", "Home"); 
-            foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                AppRole _role = new AppRole
+                {
+                    Name = model.RoleName,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = "Kachi"
+                };
+                var result = await _roleManager.CreateAsync(_role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "Home");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
             return View(model);
         }
     }
 }
+

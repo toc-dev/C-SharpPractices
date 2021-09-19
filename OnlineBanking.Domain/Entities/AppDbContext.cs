@@ -22,6 +22,5 @@ namespace OnlineBanking.Domain.Entities
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        
     }
 }
