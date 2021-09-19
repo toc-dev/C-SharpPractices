@@ -28,6 +28,7 @@ namespace WebUI.domain.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -72,6 +73,8 @@ namespace WebUI.domain.Controllers
             return View(model);
         }
 
+
+        [AllowAnonymous]
         public ViewResult LogIn()
         {
             return View();
@@ -79,25 +82,21 @@ namespace WebUI.domain.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> LogIn(LogInViewModel model, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
+            if (user == null)            
                 ModelState.AddModelError("", "Invalid login attempt.");
-
-            }
+            
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-            var roles = await _userManager.GetRolesAsync(user);
-
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+            
             if (result.Succeeded)
             {
                 // _logger.LogInformation("User logged in.");
@@ -115,7 +114,14 @@ namespace WebUI.domain.Controllers
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
+        }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
         }
     }
 }

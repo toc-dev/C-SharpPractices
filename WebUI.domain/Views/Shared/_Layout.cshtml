@@ -21,25 +21,26 @@
 
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        @*
-                            @if (signInManger.IsSignedIn(User))
-                            {
-                                <li class="nav-item">
-                                    <form method="post" asp-controller="Account" asp-action="Logout">
-                                        <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
-                                            Logout @User.Identity.Name
-                                        </button>
-                                    </form>
-                                </li>
-                            }
-                        *@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">LogIn</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">Sign Up</a>
-                        </li>
 
+                        @if (signInManger.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                        Logout @User.Identity.Name
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn">LogIn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignUp">Sign Up</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
