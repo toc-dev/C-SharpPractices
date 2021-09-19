@@ -86,12 +86,13 @@ namespace WebUI.domain.Controllers
         public async Task<IActionResult> LogIn(LogInViewModel model, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+            if (!ModelState.IsValid)
+                return View(model);
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)            
                 ModelState.AddModelError("", "Invalid login attempt.");
             
-            if (!ModelState.IsValid)
-                return View(model);
+            
             
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true

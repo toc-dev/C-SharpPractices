@@ -8,8 +8,8 @@ namespace WebUI.domain.Model
 {
     public class LogInViewModel
     {
-        [Required]
         [EmailAddress]
+        [Required]
         public string Email { get; set; }
 
         [Required]
