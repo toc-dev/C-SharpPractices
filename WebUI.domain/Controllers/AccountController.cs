@@ -126,5 +126,15 @@ namespace WebUI.domain.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
         }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<JsonResult> IsEmailUsed(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return Json(true);
+            return Json($"{email} already exists");
+        }
     }
 }
