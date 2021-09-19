@@ -1,0 +1,30 @@
+﻿@model WebUI.domain.Model.CreateRoleViewModel
+
+@{ 
+    ViewBag.Title = "Create New Role";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create New Role</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <h5 class="bg-primary text-white text-center m-2 p-2">Account</h5>
+    <form asp-action="RoleName" method="post" class="m-2">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="RoleName">Role Name</label>
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Role</button>
+    </form>
+</body>
+</html>
