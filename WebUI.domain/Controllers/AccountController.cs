@@ -100,7 +100,10 @@ namespace WebUI.domain.Controllers
             if (result.Succeeded)
             {
                 // _logger.LogInformation("User logged in.");
-                return LocalRedirect(returnUrl);
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return LocalRedirect(returnUrl);
+                }
             }
             if (result.RequiresTwoFactor)
             {
