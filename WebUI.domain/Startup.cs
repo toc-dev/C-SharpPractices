@@ -32,11 +32,12 @@ namespace WebUI.domain
             services.AddControllersWithViews();
 
             services.AddScoped<DbContext, ApplicationDbContext>();
+
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ICustomerRepository, CustomerRepository>();
             //services.AddScoped<ICustomerService, CustomerService>();
 
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, AppRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
 
