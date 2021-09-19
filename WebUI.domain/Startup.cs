@@ -44,13 +44,13 @@ namespace WebUI.domain
                 //Other options go here
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc(options =>
+            /*services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
-            }).AddXmlSerializerFormatters();
+            }).AddXmlSerializerFormatters();*/
 
 
         }

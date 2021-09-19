@@ -13,21 +13,20 @@ namespace WebUI.domain.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly AppRole _role;
+        private readonly RoleManager<AppRole> _roleManager;
+        private readonly AppRole _role = new AppRole();
 
-        public AdminController(RoleManager<IdentityRole> roleManager, AppRole role)
+        public AdminController(RoleManager<AppRole> roleManager)
         {
             _roleManager = roleManager;
-            _role = role;
         }
 
 
         [HttpGet]
         public IActionResult CreateRole()
         {
-            ViewBag.Title = "Create Role";
-            return View();
+            
+            return View();     
         }
 
         [HttpPost]

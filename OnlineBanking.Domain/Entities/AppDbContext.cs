@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace OnlineBanking.Domain.Entities
 {
-   public class ApplicationDbContext : IdentityDbContext<User>
+   public class ApplicationDbContext : IdentityDbContext<User, AppRole, string>
     {       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {

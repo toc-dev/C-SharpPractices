@@ -1,7 +1,10 @@
 ﻿@model WebUI.domain.Model.CreateRoleViewModel
 
+@{ 
+    ViewData["Title"] = "Create Role";
+}
 
-<body>
+<div>
     <h5 class="bg-primary text-white text-center m-2 p-2">Account</h5>
     <form asp-action="RoleName" method="post" class="m-2">
         <div asp-validation-summary="All" class="text-danger"></div>
@@ -14,4 +17,4 @@
 
         <button type="submit" class="btn btn-primary">Create Role</button>
     </form>
-</body>
+</div>
