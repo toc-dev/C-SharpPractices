@@ -16,7 +16,7 @@ namespace WebUI.domain.Model
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress]
-        [Remote(controller: "Account", action:"IsEmailUsed")]
+        [Remote(action: "IsEmailUsed", controller: "Account")]
         public string Email { get; set; }
 
         [Required]

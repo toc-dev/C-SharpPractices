@@ -129,7 +129,7 @@ namespace WebUI.domain.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<JsonResult> IsEmailUsed(string email)
+        public async Task<IActionResult> IsEmailUsed(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
