@@ -36,12 +36,14 @@ namespace WebUI.domain.Controllers
                 {
                     Name = model.RoleName,
                     CreatedAt = DateTime.Now,
-                    CreatedBy = "Kachi"
+                    CreatedBy = "Kachi",
+                    UpdatedBy = "Tochukwu",
+                    UpdatedAt = DateTime.Now
                 };
                 var result = await _roleManager.CreateAsync(_role);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "Home");
+                    return RedirectToAction("ListRoles", "Admin");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -49,6 +51,13 @@ namespace WebUI.domain.Controllers
                 }
             }
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = _roleManager.Roles;
+            return View(roles);
+
         }
     }
 }
