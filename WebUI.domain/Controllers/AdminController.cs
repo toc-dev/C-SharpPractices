@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.domain.Model;
+using WebUI.domain.Utilities;
 
 namespace WebUI.domain.Controllers
 {
@@ -232,7 +233,7 @@ namespace WebUI.domain.Controllers
             return View(model);
         }
 
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterCustomer(RegisterCustomerViewModel model)
         {
@@ -258,8 +259,9 @@ namespace WebUI.domain.Controllers
                     Country = model.Country
                 }
             };
-            var result = await _userManager.CreateAsync(user, model.Password);
-        }*/
+            var password = Tools.PasswordGenerator($"B{model.Email}4");
+            var result = await _userManager.CreateAsync(user, password);
+        }
     }
 }
     
