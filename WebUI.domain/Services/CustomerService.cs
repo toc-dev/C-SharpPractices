@@ -36,9 +36,7 @@ namespace WebUI.Domain.Services
             var customer = new Customer
             {
                 FirstName = $"{model.FirstName}",
-                LastName = $"{model.LastName}",
-                Gender = model.Gender,
-                Birthday = model.Birthday,
+                LastName = $"{model.LastName}",                
                 Age = DateTime.Now.Year - model.Birthday.Year,
                 Country = $"{model.Country}",
                 Account = new Account

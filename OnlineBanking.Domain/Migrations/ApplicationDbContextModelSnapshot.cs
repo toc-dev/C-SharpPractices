@@ -251,9 +251,6 @@ namespace OnlineBanking.Domain.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
@@ -268,9 +265,6 @@ namespace OnlineBanking.Domain.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(20)
@@ -305,6 +299,9 @@ namespace OnlineBanking.Domain.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -324,6 +321,9 @@ namespace OnlineBanking.Domain.Migrations
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

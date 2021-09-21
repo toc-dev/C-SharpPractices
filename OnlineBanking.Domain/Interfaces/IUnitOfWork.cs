@@ -11,6 +11,8 @@ namespace OnlineBanking.Domain.Interfaces
     {
         IRepository<Account> Accounts { get; }
         IRepository<Customer> Customers { get; }
+        IRepository<Address> Addresses { get; }
+
         Task<int> CommitAsync();
         int Commit();
     }

@@ -20,8 +20,6 @@ namespace OnlineBanking.Domain.Entities
         [MaxLength(20)]
         [MinLength(4)]
         public string LastName { get; set; }
-        public Gender Gender { get; set; }
-        public DateTime Birthday { get; set; }
         public int Age { get; set; }
         public string Country { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -12,14 +12,19 @@ namespace OnlineBanking.Domain.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+        private IRepository<Customer> _customers;
+        private IRepository<Account> _accounts;
+        private IRepository<Address> _addresses;
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
-        private IRepository<Customer> _customers;
-        private IRepository<Account> _accounts;
+        
+
         public IRepository<Customer> Customers { get { return _customers ??= _customers = new CustomerRepository(_context); } }
         public IRepository<Account> Accounts { get { return _accounts ??= _accounts = new AccountRepository(_context); } }
+        public IRepository<Address> Addresses { get { return _addresses ??= _addresses = new AddressRepository(_context); } }
 
         public int Commit()
         {

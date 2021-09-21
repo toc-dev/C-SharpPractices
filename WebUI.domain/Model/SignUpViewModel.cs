@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineBanking.Domain.Entities;
+using OnlineBanking.Domain.Enumerators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,8 @@ namespace WebUI.domain.Model
 {
     public class SignUpViewModel
     {
+        public Gender Gender { get; set; }
+
         [Required]
         [Phone]
         public string PhoneNumber { get; set; }
@@ -27,6 +30,9 @@ namespace WebUI.domain.Model
 
         [Required(ErrorMessage = "Last name required")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Provide your Date of Birth")]
+        public DateTime Birthday { get; set; }
 
         [Required]
         public int PlotNo { get; set; }

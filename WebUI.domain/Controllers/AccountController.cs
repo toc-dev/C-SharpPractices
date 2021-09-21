@@ -43,6 +43,8 @@ namespace WebUI.domain.Controllers
                     Email = model.Email,
                     UserName = model.UserName,
                     FullName = $"{model.FirstName} {model.LastName}",
+                    Birthday = model.Birthday,
+                    Gender = model.Gender,
                     Address = new Address
                     {
                         PlotNo = model.PlotNo,
