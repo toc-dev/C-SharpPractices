@@ -13,6 +13,10 @@ using OnlineBanking.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using OnlineBanking.Domain.Interfaces;
+using OnlineBanking.Domain.UnitOfWork;
+using OnlineBanking.Domain.Interfaces.Repositories;
+using OnlineBanking.Domain.Repositories;
 
 namespace WebUI.domain
 {
@@ -32,8 +36,8 @@ namespace WebUI.domain
             services.AddControllersWithViews();
 
             services.AddScoped<DbContext, ApplicationDbContext>();
-
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             //services.AddScoped<ICustomerRepository, CustomerRepository>();
             //services.AddScoped<ICustomerService, CustomerService>();
 
