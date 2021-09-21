@@ -184,9 +184,6 @@ namespace WebUI.domain.Controllers
             }
             return RedirectToAction("EditRole", new { Id = roleId });
         }
-    }
-}
-
 
         public IActionResult RegisterCustomer()
         {
@@ -265,5 +262,10 @@ namespace WebUI.domain.Controllers
         }*/
     }
 }
+    }
+}
+
+
+        
 
 
