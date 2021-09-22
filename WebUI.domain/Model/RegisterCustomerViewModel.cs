@@ -23,5 +23,7 @@ namespace WebUI.domain.Model
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
+        public new string Password { get; set; }
+        public new string ConfirmPassword { get; set; }
     }
 }

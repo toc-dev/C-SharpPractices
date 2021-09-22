@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,18 +25,31 @@ namespace WebUI.domain.Utilities
 
         public static char[] FisherYatesShuffler(char[] arr)
         {
-            var shuffledArray = arr;
-            int n = shuffledArray.Length;
+            int n = arr.Length;
             var random = new Random();
-            while (n > 1)
+            for (int i = 0; i < n; i++)
             {
                 int k = random.Next(n--);
-                char temp = shuffledArray[n];
-                shuffledArray[n] = shuffledArray[k];
-                shuffledArray[k] = temp;
+                char temp = arr[n];
+                arr[n] = arr[k];
+                arr[k] = temp;
             }
-            return shuffledArray;
+            return arr;
         }
+
+        public static string GenerateAccountNumber()
+        {
+            var milisecndns = string.Format("{0:000}", DateTime.Now.Millisecond);
+            var year = DateTime.Now.ToString("yy");
+            var month = string.Format("{0:00}", DateTime.Now.Month);
+            var day = (RandomNumberGenerator.GetInt32(10, 99)).ToString();
+
+            var str = year + month + milisecndns + day;
+            return str;
+        }
+
+
     }
+
 }
 

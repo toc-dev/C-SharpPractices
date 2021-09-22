@@ -1,9 +1,12 @@
 ﻿using OnlineBanking.Domain.Entities;
+using OnlineBanking.Domain.Enumerators;
 using OnlineBanking.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using WebUI.domain.Model;
+using WebUI.domain.Utilities;
 using WebUI.Domain.Model;
 
 namespace WebUI.Domain.Services
@@ -17,7 +20,40 @@ namespace WebUI.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Customer Get(int Id)
+        public int CreateCustomer(RegisterCustomerViewModel model, bool IsUserExist)
+        {
+            var customer = new Customer
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.Age,
+                Country = model.Country,
+                CreatedAt = DateTime.Now,
+                CreatedBy = "Admin Name",
+                Account = new Account
+                {
+                    AccountNumber = int.Parse(Tools.GenerateAccountNumber()),
+                    AccountType = model.AccountType,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = "Admin"
+                }
+            };
+            // if customer already exists, then indicate  that the password default is false. it is set to true in the customer entity class
+            if (IsUserExist)
+                customer.DefaultPassword = false;
+
+            if (model.AccountType == (AccountType)1)
+                customer.Account.Balance = 5000;
+            else
+                customer.Account.Balance = 0;
+
+            _unitOfWork.Customers.Add(customer);
+            _unitOfWork.Commit();
+
+            return customer.Account.AccountNumber;
+        }
+
+        /*public Customer Get(int Id)
         {
             Customer customer = null;
             try
@@ -31,32 +67,8 @@ namespace WebUI.Domain.Services
             return customer;
         }
 
-        public Customer CreateCustomer(CreateCustomerViewModel model)
-        {
-            var customer = new Customer
-            {
-                FirstName = $"{model.FirstName}",
-                LastName = $"{model.LastName}",                
-                Age = DateTime.Now.Year - model.Birthday.Year,
-                Country = $"{model.Country}",
-                Account = new Account
-                {
-                    //AccountNumber = $"{RandomNumberGenerator.GetInt32(999999999)}",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = $"{model.CreatedBy}",
-                    Balance = model.Balance,
-                    AccountType = model.AccountType
-                },
-                CreatedAt = DateTime.Now,
-                CreatedBy = $"{model.CreatedBy}"
-            };
-            _unitOfWork.Customers.Add(customer);
-            _unitOfWork.Commit();
+        
 
-            return customer;
-        }
-
-        public Account Account { get; set; }
         public int Update(UpdateViewModel model, int Id)
         {
             int updatedRow = 0;
@@ -65,6 +77,6 @@ namespace WebUI.Domain.Services
             customer.LastName = model.LastName ??= customer.LastName;
             updatedRow = _unitOfWork.Commit();
             return updatedRow;
-        }
+        }*/
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.domain.Model;
 using WebUI.domain.Utilities;
+using WebUI.Domain.Services;
 
 namespace WebUI.domain.Controllers
 {
@@ -233,7 +234,7 @@ namespace WebUI.domain.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            
+
             var user = new User
             {
                 UserName = model.UserName,
@@ -243,7 +244,7 @@ namespace WebUI.domain.Controllers
                 Gender = model.Gender,
                 CreatedBy = "Kachi",
                 CreatedAt = DateTime.Now,
-                PhoneNumber = model.PhoneNumber,      
+                PhoneNumber = model.PhoneNumber,
                 Address = new Address
                 {
                     PlotNo = model.PlotNo,
@@ -253,33 +254,21 @@ namespace WebUI.domain.Controllers
                     Country = model.Country
                 }
             };
-
             bool IsUserExist = true;
             //checks if user does not exist
             if (await _userManager.FindByEmailAsync(model.Email) == null)
             {
                 IsUserExist = false;
-                var password = Tools.PasswordGenerator($"BpOnline{model.Email}");
+                var password = Tools.PasswordGenerator($"BpOn$43#{model.Email}");
                 var result = await _userManager.CreateAsync(user, password);
                 //if success, send email confimation with password to user. else display failed message on admin screen then return to prevent further operations
             }
 
-            var customer = new Customer
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Age = model.Age,
-                Country = model.Country,
-                CreatedAt = DateTime.Now,
-                CreatedBy = "Admin Name",
-                Account = new Account
-                {
+            int registerationResult = new CustomerService(_unitOfWork).CreateCustomer(model, IsUserExist);
 
-                }
-            };
-
-            if (IsUserExist)
-                customer.DefaultPassword = true;
+            TempData["RegistrationCompleteMessage"] = "Success Account Number is ";
+            TempData["AccountNumber"] = registerationResult;
+            //send a mail showing the user account number and balance.
 
             return View();
         }
