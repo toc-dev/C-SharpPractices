@@ -83,8 +83,8 @@
 </form>
 
 <h2>Create for an existing user</h2>
-@TempData["ErrorMsg"];
-<form asp-action="RegisterCustomer" method="post">
+@TempData["ErrorMsg"]
+<form asp-action="RegisterCustomer" method="get">
     <div class="form-group">
         <label for="userEmail">Enter user email</label>
         <input type="text" id="userEmail" name="userEmail" class="form-control" />

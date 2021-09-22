@@ -186,13 +186,7 @@ namespace WebUI.domain.Controllers
             return RedirectToAction("EditRole", new { Id = roleId });
         }
 
-        public IActionResult RegisterCustomer()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> RegisterCustomer(string userEmail)
         {
             if (string.IsNullOrEmpty(userEmail))
