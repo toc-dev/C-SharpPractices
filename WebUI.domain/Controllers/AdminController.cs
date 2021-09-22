@@ -253,8 +253,35 @@ namespace WebUI.domain.Controllers
                     Country = model.Country
                 }
             };
-            var password = Tools.PasswordGenerator($"B{model.Email}4");
-            var result = await _userManager.CreateAsync(user, password);
+
+            bool IsUserExist = true;
+            //checks if user does not exist
+            if (await _userManager.FindByEmailAsync(model.Email) == null)
+            {
+                IsUserExist = false;
+                var password = Tools.PasswordGenerator($"BpOnline{model.Email}");
+                var result = await _userManager.CreateAsync(user, password);
+                //if success, send email confimation with password to user. else display failed message on admin screen then return to prevent further operations
+            }
+
+            var customer = new Customer
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.Age,
+                Country = model.Country,
+                CreatedAt = DateTime.Now,
+                CreatedBy = "Admin Name",
+                Account = new Account
+                {
+
+                }
+            };
+
+            if (IsUserExist)
+                customer.DefaultPassword = true;
+
+            return View();
         }
     }
 }
