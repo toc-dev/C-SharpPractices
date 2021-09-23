@@ -34,6 +34,13 @@ namespace WebUI.domain
                 options.UseSqlServer(Configuration.GetConnectionString("OBConnection")));
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.ConfigureApplicationCookie(c =>
+            {
+                c.LoginPath = "/Account/Login";
+                c.LogoutPath = "/Home/Index";
+                c.AccessDeniedPath = "/Account/AccessDenied";
+            });
 
             services.AddScoped<DbContext, ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -41,12 +48,15 @@ namespace WebUI.domain
             //services.AddScoped<ICustomerRepository, CustomerRepository>();
             //services.AddScoped<ICustomerService, CustomerService>();
 
+
             services.AddIdentity<User, AppRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
 
                 //Other options go here
             }).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            
 
             /*services.AddMvc(options =>
             {
@@ -89,4 +99,11 @@ namespace WebUI.domain
 
         }
     }
+
+   /* public class Startup
+    {     
+            SeedRole.EnsurePopulated(app);
+            SeedAdmin.EnsurePopulated(app);
+    }*/
+
 }
