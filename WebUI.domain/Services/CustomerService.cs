@@ -27,7 +27,7 @@ namespace WebUI.Domain.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Age = model.Age,
-                Country = model.Country,
+                Nationality = model.Country,
                 CreatedAt = DateTime.Now,
                 CreatedBy = "Admin Name",
                 Account = new Account

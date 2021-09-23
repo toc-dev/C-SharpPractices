@@ -21,7 +21,7 @@ namespace OnlineBanking.Domain.Entities
         [MinLength(4)]
         public string LastName { get; set; }
         public int Age { get; set; }
-        public string Country { get; set; }
+        public string Nationality { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string CreatedBy { get; set; }
@@ -30,5 +30,6 @@ namespace OnlineBanking.Domain.Entities
         public Account Account { get; set; }
         public bool DefaultPassword { get; set; } = true;
 
-    }
+    }  
+
 }

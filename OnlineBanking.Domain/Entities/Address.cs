@@ -27,5 +27,10 @@ namespace OnlineBanking.Domain.Entities
         public string Country { get; set; }
                 
     }
-
 }
+
+/* Bonus work to allow linking to all customers that use a particular address: Kachi note
+public int CustomerId { get; set; }
+
+public Customer Customers { get; set; }
+*/

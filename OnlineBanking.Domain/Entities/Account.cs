@@ -13,9 +13,9 @@ namespace OnlineBanking.Domain.Entities
         [Key]
         public Guid Id { get; set; }
 
-        public int? UserId { get; set; }
-
         public int CustomerId { get; set; }
+
+        public Customer Customer { get; set; }
                 
         public int AccountNumber { get; set; }
 

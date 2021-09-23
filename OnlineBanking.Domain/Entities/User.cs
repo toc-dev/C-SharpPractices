@@ -22,6 +22,6 @@ namespace OnlineBanking.Domain.Entities
 
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-    }
+    }   
 
 }
