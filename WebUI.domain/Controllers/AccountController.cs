@@ -22,6 +22,7 @@ namespace WebUI.domain.Controllers
             _signInManager = signInManager;
         }
 
+        /* Signup to be deleted
         [AllowAnonymous]
         public IActionResult SignUp()
         {
@@ -74,13 +75,16 @@ namespace WebUI.domain.Controllers
             }
             return View(model);
         }
-
+        */
 
         [AllowAnonymous]
-        public ViewResult LogIn()
+        public  IActionResult LogIn(string returnUrl = null)
         {
+            returnUrl ??= Url.Content("~/");
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -129,7 +133,7 @@ namespace WebUI.domain.Controllers
             return RedirectToAction("index", "home");
         }
 
-        [AcceptVerbs("Get", "Post")]
+        /*[AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> IsEmailUsed(string email)
         {
@@ -137,6 +141,6 @@ namespace WebUI.domain.Controllers
             if (user == null)
                 return Json(true);
             return Json($"{email} already exists");
-        }
+        }*/
     }
 }
