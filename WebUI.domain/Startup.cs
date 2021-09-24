@@ -17,6 +17,7 @@ using OnlineBanking.Domain.Interfaces;
 using OnlineBanking.Domain.UnitOfWork;
 using OnlineBanking.Domain.Interfaces.Repositories;
 using OnlineBanking.Domain.Repositories;
+using WebUI.domain.Services;
 
 namespace WebUI.domain
 {
@@ -97,14 +98,8 @@ namespace WebUI.domain
                     pattern: "{controller=home}/{action=index}/{id?}");
             });
 
-            DataInitializer.EnsurePoulated(app);
+            SeedRoles.EnsurePopulated(app);
+            SeedDefaultUsers.EnsurePopulated(app);
         }
     }
-
-   /* public class Startup
-    {     
-            SeedRole.EnsurePopulated(app);
-            SeedAdmin.EnsurePopulated(app);
-    }*/
-
 }
