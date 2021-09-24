@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using WebUI.domain.Model;
 using WebUI.domain.Utilities;
-using WebUI.Domain.Model;
 
 namespace WebUI.Domain.Services
 {
