@@ -13,9 +13,61 @@ namespace WebUI.domain.Services
 {
     public static class SeedDefaultUsers
     {
-        static User Onah = new User {Email = "theGrandestMaster@bezao.com"};
-        static User Kachi = new User {Email = "kachi@bezao.com"};
-        static User Tochi = new User {Email = "tochi@bezao.com"};
+        static User Onah = new User
+        {
+            Email = "theGrandestMaster@bezao.com",
+            PhoneNumber = "08034735341",
+            UserName = "Onah",
+            Address = new Address
+            {
+                PlotNo = 32,
+                StreetName = "Bezao street",
+                City = "Tenece City",
+                State = "Enugu",
+                Country = "Nigeria",
+            },
+            Birthday = new DateTime(09 / 22 / 1907),
+            CreatedAt = DateTime.Now,
+            CreatedBy = "Developer",
+            Gender = Gender.Male
+
+        };
+        static User Kachi = new User
+        {
+            Email = "kachi@bezao.com",
+            PhoneNumber = "08034735340",
+            UserName = "Kachii",
+            Address = new Address
+            {
+                PlotNo = 32,
+                StreetName = "Bezao street",
+                City = "Tenece City",
+                State = "Enugu",
+                Country = "Nigeria",
+            },
+            Birthday = new DateTime(10 / 23 / 1900),
+            CreatedAt = DateTime.Now,
+            CreatedBy = "Developer",
+            Gender = Gender.Male
+        };
+        static User Tochi = new User
+        {
+            Email = "tochi@bezao.com",
+            PhoneNumber = "08034735342",
+            UserName = "GirlCode",
+            Address = new Address
+            {
+                PlotNo = 32,
+                StreetName = "Bezao street",
+                City = "Tenece City",
+                State = "Enugu",
+                Country = "Nigeria",
+            },
+            Birthday = new DateTime(09 / 30 / 1904),
+            CreatedAt = DateTime.Now,
+            CreatedBy = "Developer",
+            Gender = Gender.Male
+        };
 
         static User Alex = new User
         {
