@@ -97,6 +97,7 @@ namespace WebUI.domain
                     pattern: "{controller=home}/{action=index}/{id?}");
             });
 
+            DataInitializer.EnsurePoulated(app);
         }
     }
 
