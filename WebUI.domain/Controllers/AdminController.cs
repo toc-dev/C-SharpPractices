@@ -207,20 +207,20 @@ namespace WebUI.domain.Controllers
             var nameArray = user.FullName.Split(" ");
             var model = new RegisterCustomerViewModel
             {
-                PhoneNumber = user.PhoneNumber,
-                UserName = user.UserName,
-                PlotNo = address.PlotNo,
-                StreetName = address.StreetName,
-                City = address.City,
-                State = address.State,
-                LastName = nameArray[1],
-                FirstName = nameArray[0],
-                Email = user.Email,
-                Gender = user.Gender,
-                Birthday = user.Birthday,
-                Country = address.Country,
-                CreatedBy = "Kachi",
-                CreatedAt = DateTime.Now
+                //PhoneNumber = user.PhoneNumber,
+                //UserName = user.UserName,
+                //PlotNo = address.PlotNo,
+                //StreetName = address.StreetName,
+                //City = address.City,
+                //State = address.State,
+                //LastName = nameArray[1],
+                //FirstName = nameArray[0],
+                //Email = user.Email,
+                //Gender = user.Gender,
+                //Birthday = user.Birthday,
+                //Country = address.Country,
+                //CreatedBy = "Kachi",
+                //CreatedAt = DateTime.Now
             };
             if (user.Birthday != null)
                 model.Age = (DateTime.Now.Year - user.Birthday.Year);
@@ -235,39 +235,39 @@ namespace WebUI.domain.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var user = new User
-            {
-                UserName = model.UserName,
-                FullName = $"{model.FirstName} {model.LastName}",
-                Email = model.Email,
-                Birthday = model.Birthday,
-                Gender = model.Gender,
-                CreatedBy = "Kachi",
-                CreatedAt = DateTime.Now,
-                PhoneNumber = model.PhoneNumber,
-                Address = new Address
-                {
-                    PlotNo = model.PlotNo,
-                    StreetName = model.StreetName,
-                    City = model.State,
-                    State = model.State,
-                    Country = model.Country
-                }
-            };
-            bool IsUserExist = true;
-            //checks if user does not exist
-            if (await _userManager.FindByEmailAsync(model.Email) == null)
-            {
-                IsUserExist = false;
-                var password = Tools.PasswordGenerator($"BpOn$43#{model.Email}");
-                var result = await _userManager.CreateAsync(user, password);
-                //if success, send email confimation with password to user. else display failed message on admin screen then return to prevent further operations
-            }
+            //var user = new User
+            //{
+            //    UserName = model.UserName,
+            //    FullName = $"{model.FirstName} {model.LastName}",
+            //    Email = model.Email,
+            //    Birthday = model.Birthday,
+            //    Gender = model.Gender,
+            //    CreatedBy = "Kachi",
+            //    CreatedAt = DateTime.Now,
+            //    PhoneNumber = model.PhoneNumber,
+            //    Address = new Address
+            //    {
+            //        PlotNo = model.PlotNo,
+            //        StreetName = model.StreetName,
+            //        City = model.State,
+            //        State = model.State,
+            //        Country = model.Country
+            //    }
+            //};
+            //bool IsUserExist = true;
+            ////checks if user does not exist
+            //if (await _userManager.FindByEmailAsync(model.Email) == null)
+            //{
+            //    IsUserExist = false;
+            //    var password = Tools.PasswordGenerator($"BpOn$43#{model.Email}");
+            //    var result = await _userManager.CreateAsync(user, password);
+            //    //if success, send email confimation with password to user. else display failed message on admin screen then return to prevent further operations
+            //}
 
-            int registerationResult = new CustomerService(_unitOfWork).CreateCustomer(model, IsUserExist);
+            //int registerationResult = new CustomerService(_unitOfWork).CreateCustomer(model, IsUserExist);
 
             TempData["RegistrationCompleteMessage"] = "Success Account Number is ";
-            TempData["AccountNumber"] = registerationResult;
+            //TempData["AccountNumber"] = registerationResult;
             //send a mail showing the user account number and balance.
 
             return View();

@@ -13,6 +13,7 @@ namespace OnlineBanking.Domain.Entities
         [Key]
         public Guid Id { get; set; }
 
+        [ForeignKey("Customer")]
         public int CustomerId { get; set; }
 
         public Customer Customer { get; set; }

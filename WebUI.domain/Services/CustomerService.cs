@@ -20,63 +20,65 @@ namespace WebUI.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public int CreateCustomer(RegisterCustomerViewModel model, bool IsUserExist)
+       /* public int CreateCustomer(RegisterCustomerViewModel model, bool IsUserExist)
         {
             var customer = new Customer
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Age = model.Age,
-                Nationality = model.Country,
-                CreatedAt = DateTime.Now,
-                CreatedBy = "Admin Name",
-                Account = new Account
-                {
-                    AccountNumber = int.Parse(Tools.GenerateAccountNumber()),
-                    AccountType = model.AccountType,
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "Admin"
-                }
+                //FirstName = model.FirstName,
+                //LastName = model.LastName,
+                //Age = model.Age,
+                //Nationality = model.Country,
+                //CreatedAt = DateTime.Now,
+                //CreatedBy = "Admin Name",
+                //Account = new Account
+                //{
+                //    AccountNumber = int.Parse(Tools.GenerateAccountNumber()),
+                //    AccountType = model.AccountType,
+                //    CreatedAt = DateTime.Now,
+                //    CreatedBy = "Admin"
+                //}
             };
             // if customer already exists, then indicate  that the password default is false. it is set to true in the customer entity class
-            if (IsUserExist)
-                customer.DefaultPassword = false;
+            /* if (IsUserExist)
+                 customer.DefaultPassword = false;
 
-            if (model.AccountType == (AccountType)1)
-                customer.Account.Balance = 5000;
-            else
-                customer.Account.Balance = 0;
+             if (model.AccountType == (AccountType)1)
+                 customer.Account.Balance = 5000;
+             else
+                 customer.Account.Balance = 0;
 
-            _unitOfWork.Customers.Add(customer);
-            _unitOfWork.Commit();
+             _unitOfWork.Customers.Add(customer);
+             _unitOfWork.Commit();
 
-            return customer.Account.AccountNumber;
-        }
+             return customer.Account.AccountNumber;
+         }*/
 
-        /*public Customer Get(int Id)
-        {
-            Customer customer = null;
-            try
+            /*public Customer Get(int Id)
             {
-                customer = _unitOfWork.Customers.Get(Id);
-            }
-            catch
-            {
+                Customer customer = null;
+                try
+                {
+                    customer = _unitOfWork.Customers.Get(Id);
+                }
+                catch
+                {
+                    return customer;
+                }
                 return customer;
             }
-            return customer;
-        }
 
-        
 
-        public int Update(UpdateViewModel model, int Id)
-        {
-            int updatedRow = 0;
-            var customer = _unitOfWork.Customers.Get(Id);
-            customer.FirstName = model.FirstName ??= customer.FirstName;
-            customer.LastName = model.LastName ??= customer.LastName;
-            updatedRow = _unitOfWork.Commit();
-            return updatedRow;
+
+            public int Update(UpdateViewModel model, int Id)
+            {
+                int updatedRow = 0;
+                var customer = _unitOfWork.Customers.Get(Id);
+                customer.FirstName = model.FirstName ??= customer.FirstName;
+                customer.LastName = model.LastName ??= customer.LastName;
+                updatedRow = _unitOfWork.Commit();
+                return updatedRow;
+            
         }*/
+        
     }
 }

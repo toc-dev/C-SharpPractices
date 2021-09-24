@@ -26,8 +26,8 @@ namespace OnlineBanking.Domain.Entities
         public DateTime UpdatedAt { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
-        public Guid AccountId { get; set; }    
-        public Account Account { get; set; }
+
+        public ICollection<Account> Accounts { get; set; }
         public bool DefaultPassword { get; set; } = true;
 
     }  

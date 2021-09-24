@@ -18,9 +18,9 @@ namespace OnlineBanking.Domain.Entities
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
 
+        [ForeignKey("AddressId")]
         public int AddressId { get; set; }
 
-        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
     }   
 

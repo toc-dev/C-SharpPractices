@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebUI.domain.Model
 {
-    public class RegisterCustomerViewModel : SignUpViewModel
+    public class RegisterCustomerViewModel
     {
         public int UserId { get; set; }
         public int CustomerId { get; set; }
@@ -23,7 +23,7 @@ namespace WebUI.domain.Model
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public new string Password { get; set; }
-        public new string ConfirmPassword { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }
