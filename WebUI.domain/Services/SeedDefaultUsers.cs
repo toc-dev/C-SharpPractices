@@ -13,9 +13,10 @@ namespace WebUI.domain.Services
 {
     public static class SeedDefaultUsers
     {
-        static User Onah = new User { Email = "theGrandestMaster@bezao.com" };
-        static User Kachi = new User { Email = "kachi@bezao.com" };
-        static User Tochi = new User { Email = "tochi@bezao.com" };
+        static User Onah = new User {Email = "theGrandestMaster@bezao.com"};
+        static User Kachi = new User {Email = "kachi@bezao.com"};
+        static User Tochi = new User {Email = "tochi@bezao.com"};
+
         static User Alex = new User
         {
             FullName = "Ogubuike Alex",
@@ -35,6 +36,7 @@ namespace WebUI.domain.Services
             Email = "alex@bezao.com",
             Gender = Gender.PreferNotToSay
         };
+
         static User Chikki = new User
         {
             FullName = "Chinese Chikki",
@@ -54,6 +56,7 @@ namespace WebUI.domain.Services
             Email = "chikki@bezao.com",
             Gender = Gender.Female
         };
+
         static User Dara = new User
         {
             FullName = "Dara Johnson",
@@ -85,46 +88,27 @@ namespace WebUI.domain.Services
                 .CreateScope().ServiceProvider
                 .GetRequiredService<UserManager<User>>();
 
-            CreateSuperAdmin(userManager, Onah);
-            CreateAdmin(userManager, Kachi);
-            CreateAdmin(userManager, Tochi);
-            CreateCustomers(userManager, Alex);
-            CreateCustomers(userManager, Chikki);
-            CreateCustomers(userManager, Dara);
+            await CreateUser(userManager, Onah, Roles.GrandMaster.ToString());
+            await CreateUser(userManager, Tochi, Roles.Masters.ToString());
+            await CreateUser(userManager, Alex, Roles.Customers.ToString());
+            await CreateUser(userManager, Chikki, Roles.Customers.ToString());
+            await CreateUser(userManager, Dara, Roles.Customers.ToString());
+            await CreateUser(userManager, Kachi, Roles.Masters.ToString());
+
+
+            static async Task CreateUser(UserManager<User> userManager, User defaultUser, string roleName)
+            {
+                var user = await userManager.FindByEmailAsync(defaultUser.Email);
+                if (user != null) return;
+                user = defaultUser;
+
+                var createUser = await userManager.CreateAsync(user, "4KatochiBank$");
+
+                if (createUser.Succeeded) await userManager.AddToRoleAsync(user, roleName);
+            }
+
+
         }
 
-        static async void CreateSuperAdmin(UserManager<User> userManager, User Defaultuser)
-        {
-            var user = await userManager.FindByEmailAsync(Defaultuser.Email);
-            if (user != null) return;
-            user = Defaultuser;   
-            
-            var createUser = await userManager.CreateAsync(user, "4KatochiBank$");
-
-            if (createUser.Succeeded) await userManager.AddToRoleAsync(user, Roles.GrandMaster.ToString());
-        }
-
-        static async void CreateAdmin (UserManager<User> userManager, User Defaultuser)
-        {
-            var user = await userManager.FindByEmailAsync(Defaultuser.Email);
-            if (user != null) return;
-            user = Defaultuser;
-
-            var createUser = await userManager.CreateAsync(user, "4KatochiBank$");
-
-            if (createUser.Succeeded) await userManager.AddToRoleAsync(user, Roles.Masters.ToString());
-        }
-
-        static async void CreateCustomers (UserManager<User> userManager, User Defaultuser)
-        {
-            var user = await userManager.FindByEmailAsync(Defaultuser.Email);
-            if (user != null) return;
-            user = Defaultuser;
-
-            var createUser = await userManager.CreateAsync(user, "4KatochiBank$");
-
-            if (createUser.Succeeded) await userManager.AddToRoleAsync(user, Roles.Customers.ToString());
-        }
     }
-
 }
