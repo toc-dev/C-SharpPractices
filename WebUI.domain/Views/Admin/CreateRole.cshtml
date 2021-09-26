@@ -1,0 +1,52 @@
+﻿@model WebUI.domain.Models.CreateRoleViewModel
+
+
+<main>
+    <center>
+        <h1 class="btn-danger">
+            @TempData["RoleExistsMsg"]
+        </h1>
+    </center>
+    <center>
+        <h1 class="btn-success">
+            @TempData["Success"]
+        </h1>
+    </center>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">
+                        Create a new Admin Role
+                    </h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">
+                            Bank KaTochi <br /> ...your money may be safe with us! <br />
+                            Fill up the Form appropriately
+                        </h3>
+                        <form asp-action="CreateRole" asp-controller="Admin" method="post" autocomplete="on" class="signin-form">
+                            <div asp-validation-summary="All"></div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="RoleName" placeholder="Role Title" required />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Create Role</button> @*change bg-color*@
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/Login.js"></script>
+
+</main>
