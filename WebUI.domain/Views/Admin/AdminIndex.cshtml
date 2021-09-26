@@ -1,11 +1,27 @@
-﻿
+﻿@model WebUI.domain.Models.SearchViewModel
 
 <main>
     <center>
         <h1 style="background-color:#2733a1;">
             @TempData["WelcomeMsg"]
         </h1>
+        <h1 style="background-color:darkred;">
+            @TempData["alert"]
+        </h1>
     </center>
+
+    <div>
+        <form asp-controller="Admin" asp-action="Search" method="get">
+            <input asp-for="Input" type="text" placeholder="search" /> in
+            <select asp-for="Options">
+                <option value="user">User</option>
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+        
+    </div>
 
     @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
     {

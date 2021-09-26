@@ -231,6 +231,23 @@ namespace WebUI.domain.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Search(SearchViewModel model)
+        {
+            if (model.Options.ToString() == "user")
+            {
+                User user;
+                user = await _userManager.FindByNameAsync(model.Input);
+                if (user == null)
+                    user = await _userManager.FindByEmailAsync(model.Input);
+                if (user == null)
+                {
+                    TempData["alert"] = "No data found";
+                    return View("AdminIndex");
+                }
+                return View("AdminIndex", model); // should be sent to search view that will display result in tables
+            }
+            return View("AdminIndex");
+        }
 
         /*
                 public IActionResult RegisterCustomers()
