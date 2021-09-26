@@ -14,7 +14,11 @@ namespace WebUI.domain.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        {
+            userManager = _userManager;
+            signInManager = _signInManager;
+        }
         public async Task<IActionResult>  EnrollUser(CreateUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -48,6 +52,52 @@ namespace WebUI.domain.Controllers
             returnUrl ??= Url.Content("~/");
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> LogIn(LoginViewModel model, string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email,
+                    model.Password, model.RememberMe, false);
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                }
+                if (result.IsLockedOut)
+                {
+                    // _logger.LogWarning("User account locked out.");
+                    return RedirectToPage("./Lockout");
+                }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+            }
+            return View(model);
+
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+            //if (user == null)
+            //ModelState.AddModelError("", "Invalid login attempt.");
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+            //if (result.Succeeded)
+            //{
+            //    // _logger.LogInformation("User logged in.");
+            //    if (!string.IsNullOrEmpty(returnUrl))
+            //    {
+            //        return LocalRedirect(returnUrl);
+            //    }
+            //}
         }
     }
 }
