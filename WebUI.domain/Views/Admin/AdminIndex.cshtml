@@ -1,3 +1,45 @@
-﻿@TempData["WelcomeMsg"]
+﻿
+
+<main>
+    <center>
+        <h1 style="background-color:#2733a1;">
+            @TempData["WelcomeMsg"]
+        </h1>
+    </center>
+
+    <div>
+        <div>
+            <p>
+                <a asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
+            </p>
+        </div>
+        
+        <div>
+            <p>
+                <a asp-controller="Admin" asp-action="">Create Admin</a>
+            </p>
+        </div>
+        <div>
+            <p>
+                <a asp-controller="Admin" asp-action="">Delete Admin</a>
+            </p>
+        </div>
+        <div>
+            <p>
+                <a asp-controller="Admin" asp-action="RegisterCustomer">Register new Customer</a>
+            </p>
+        </div>
+        <div>
+            <p>
+                <a asp-controller="Admin" asp-action="">Delete/Deactivate User</a>
+            </p>
+        </div>
+        <div>
+            <a asp-controller="Admin" asp-action="">Update???</a>
+        </div>
+        @* wAtch out for the ability of super ADmin to delete self*@
+    </div>
+</main>
+
 
 

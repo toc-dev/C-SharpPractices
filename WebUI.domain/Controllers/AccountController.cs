@@ -20,7 +20,7 @@ namespace WebUI.domain.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult>  EnrollUser(CreateUserViewModel model)
+        /*public async Task<IActionResult>  EnrollUser(CreateUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -45,7 +45,7 @@ namespace WebUI.domain.Controllers
                 ModelState.AddModelError(string.Empty, "Failed signup Attempt");
             }
             return View(model);
-        }
+        }*/
 
         [AllowAnonymous]
         public IActionResult LogIn(string returnUrl = null)
@@ -77,7 +77,7 @@ namespace WebUI.domain.Controllers
             {
                 if (await _userManager.IsInRoleAsync(user,"GrandMaster") || await _userManager.IsInRoleAsync(user,"Masters"))
                 {
-                    TempData["WelcomeMsg"] = $"Welcome {user.UserName}.";
+                    TempData["WelcomeMsg"] = $"Welcome Back Admin@{user.UserName}.";
                     return RedirectToAction("AdminIndex", "Admin");
                 }                    
                 
