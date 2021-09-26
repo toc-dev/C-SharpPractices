@@ -57,50 +57,7 @@ namespace WebUI.domain.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
-        /*public async Task<IActionResult> LogIn(LoginViewModel model, string returnUrl = null)
-        {
-            returnUrl ??= Url.Content("~/");
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email,
-                    model.Password, model.RememberMe, false);
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    // _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("index", "home");
-                }
-
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-            }
-            return View(model);
-
-            //var user = await _userManager.FindByEmailAsync(model.Email);
-            //if (user == null)
-            //ModelState.AddModelError("", "Invalid login attempt.");
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-            //if (result.Succeeded)
-            //{
-            //    // _logger.LogInformation("User logged in.");
-            //    if (!string.IsNullOrEmpty(returnUrl))
-            //    {
-            //        return LocalRedirect(returnUrl);
-            //    }
-            //}
-        }*/
-
+        [AllowAnonymous]        
         public async Task<IActionResult> LogIn(LoginViewModel model, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -109,17 +66,23 @@ namespace WebUI.domain.Controllers
 
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
+            {
                 ModelState.AddModelError("", "Invalid login attempt.");
-                        
+                return View();
+            }
+
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                // _logger.LogInformation("User logged in.");
-                if (!string.IsNullOrEmpty(returnUrl))
+                if (await _userManager.IsInRoleAsync(user,"GrandMaster") || await _userManager.IsInRoleAsync(user,"Masters"))
                 {
-                    return LocalRedirect(returnUrl);
-                }
+                    TempData["WelcomeMsg"] = $"Welcome {user.UserName}.";
+                    return RedirectToAction("AdminIndex", "Admin");
+                }                    
+                
+                else if (!string.IsNullOrEmpty(returnUrl))                
+                    return LocalRedirect(returnUrl);                
             }
             if (result.RequiresTwoFactor)
             {
@@ -135,7 +98,11 @@ namespace WebUI.domain.Controllers
             return View(model);
         }
 
-
-
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
     }
 }

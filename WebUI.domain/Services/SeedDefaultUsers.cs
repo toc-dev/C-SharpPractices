@@ -86,7 +86,7 @@ namespace WebUI.domain.Services
             CreatedAt = DateTime.Now,
             CreatedBy = "Developer",
             Email = "alex@bezao.com",
-            Gender = Gender.PreferNotToSay
+            Gender = Gender.Female
         };
 
         static User Chikki = new User
@@ -158,8 +158,6 @@ namespace WebUI.domain.Services
 
                 if (createUser.Succeeded) await userManager.AddToRoleAsync(user, roleName);
             }
-
-
         }
 
     }
