@@ -47,6 +47,7 @@ namespace WebUI.domain.Controllers
             return View(model);
         }*/
 
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult LogIn(string returnUrl = null)
         {
@@ -104,5 +105,6 @@ namespace WebUI.domain.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
         }
+
     }
 }
