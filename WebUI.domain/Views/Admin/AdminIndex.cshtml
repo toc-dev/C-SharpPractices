@@ -7,38 +7,29 @@
         </h1>
     </center>
 
+    @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
+    {
+        <div>
+            <div>
+                <p>
+                    <a asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
+                </p>
+            </div>
+        </div>
+    }
+
     <div>
-        <div>
-            <p>
-                <a asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
-            </p>
-        </div>
-        
-        <div>
-            <p>
-                <a asp-controller="Admin" asp-action="">Create Admin</a>
-            </p>
-        </div>
-        <div>
-            <p>
-                <a asp-controller="Admin" asp-action="">Delete Admin</a>
-            </p>
-        </div>
-        <div>
-            <p>
-                <a asp-controller="Admin" asp-action="RegisterCustomer">Register new Customer</a>
-            </p>
-        </div>
-        <div>
-            <p>
-                <a asp-controller="Admin" asp-action="">Delete/Deactivate User</a>
-            </p>
-        </div>
-        <div>
-            <a asp-controller="Admin" asp-action="">Update???</a>
-        </div>
-        @* wAtch out for the ability of super ADmin to delete self*@
+        <p>
+            <a asp-controller="Admin" asp-action="RegisterCustomer">Register new Customer</a>
+        </p>
     </div>
+
+    <div>
+        <p>
+            <a asp-controller="Admin" asp-action="">Delete/Deactivate User</a>
+        </p>
+    </div>
+
 </main>
 
 
