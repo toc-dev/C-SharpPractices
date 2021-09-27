@@ -1,0 +1,84 @@
+﻿@model OnlineBanking.Domain.Entities.User
+@{ViewData["Title"] = "Search";}
+
+
+@section styleLinks{
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/search.css">
+}
+
+<main>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Created By</th>
+                                    <th class="cell100 column2">Created At</th>
+                                    <th class="cell100 column3">Updated By</th>
+                                    <th class="cell100 column4">Updated At</th>
+                                    <th class="cell100 column5">Full Name</th>
+                                    <th class="cell100 column6">Phone</th>
+                                    <th class="cell100 column7">Email</th>
+                                    <th class="cell100 column8">User name</th>
+                                    <th class="cell100 column9">DOB</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@Model.CreatedBy</td>
+                                    <td class="cell100 column2">@Model.CreatedAt</td>
+                                    <td class="cell100 column3">@Model.UpdatedBy</td>
+                                    <td class="cell100 column4">@Model.UpdatedAt</td>
+                                    <td class="cell100 column5">@Model.FullName</td>
+                                    <td class="cell100 column6">@Model.PhoneNumber</td>
+                                    <td class="cell100 column7">@Model.Email</td>
+                                    <td class="cell100 column8">@Model.UserName</td>
+                                    <td class="cell100 column9">@Model.Birthday</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    @SectionWriters scripts{
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+
+    </script>
+    <script src="js/main.js"></script>
+    }
+
+
+</main>

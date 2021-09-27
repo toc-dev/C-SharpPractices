@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBanking.Domain.Entities;
+using OnlineBanking.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,15 @@ namespace WebUI.domain.Controllers
         private readonly RoleManager<AppRole> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUnitOfWork _unitofWork;
 
         public AdminController(RoleManager<AppRole> roleManager,
-            UserManager<User> userManager, SignInManager<User> signInManager)
+            UserManager<User> userManager, SignInManager<User> signInManager, IUnitOfWork unitOfWork)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitofWork = unitOfWork;
         }
 
         
@@ -231,8 +234,15 @@ namespace WebUI.domain.Controllers
             return View(model);
         }
 
+
         public async Task<IActionResult> Search(SearchViewModel model)
         {
+            if (model.Input == null)
+            {
+                TempData["alert"] = "Odeshi! I know say this na the handwork of Onah.";
+                return View("AdminIndex");
+            }
+
             if (model.Options.ToString() == "user")
             {
                 User user;
@@ -244,7 +254,21 @@ namespace WebUI.domain.Controllers
                     TempData["alert"] = "No data found";
                     return View("AdminIndex");
                 }
-                return View("AdminIndex", model); // should be sent to search view that will display result in tables
+                return View("Search", user);
+            }
+
+            if (model.Options.ToString() == "admin")
+            {
+                User user;
+                user = await _userManager.FindByNameAsync(model.Input);
+                if (user == null)
+                    user = await _userManager.FindByEmailAsync(model.Input);
+                if (user == null)
+                {
+                    TempData["alert"] = "No data found";
+                    return View("AdminIndex");
+                }
+                return View("Search", user);
             }
             return View("AdminIndex");
         }

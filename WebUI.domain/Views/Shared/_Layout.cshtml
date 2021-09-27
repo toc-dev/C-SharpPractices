@@ -25,11 +25,14 @@
 
                         @if (signInManager.IsSignedIn(User))
                         {
-                            
-                            <li>
-                                <a class="nav-link hoverable" asp-controller="Admin" asp-action="AdminIndex">DashBoard</a>
-                            </li>                           
-                            
+                            if (User.IsInRole("GrandMaster") || User.IsInRole("Masters"))
+                            {
+                                <li>
+                                    <a class="nav-link hoverable" asp-controller="Admin" asp-action="AdminIndex">DashBoard</a>
+                                </li>
+                            }
+
+
                             <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout">
                                     <button type="submit" class="nav-link btn btn-link py-0 hoverable" style="width:auto">
