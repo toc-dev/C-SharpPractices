@@ -1,9 +1,15 @@
 ﻿@model WebUI.domain.Models.SearchViewModel
 @{ViewData["Title"] = "Admin Dashboard"; }
 
+@section styleLinks{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+          crossorigin="anonymous" />
+}
+
 <main>
     <center>
-        <h1 style="background-color:#2733a1;">
+        <h1 style="background-color:lightgreen; color: #2733a1">
             @TempData["WelcomeMsg"]
         </h1>
         <h1 style="background-color:darkred;">
@@ -11,53 +17,103 @@
         </h1>
     </center>
 
-    <div>
-        <form asp-controller="Admin" asp-action="Search" method="get">
-            <input asp-for="Input" type="text" placeholder="search" /> in
-            <select asp-for="Options">
-                <option value="user">User</option>
-                <option value="customer">Customer</option>
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
-                {
-                    <option value="admin">Admin</option>
-                }
-
-            </select>
-            <button type="submit">Search</button>
-        </form>
-        
-    </div>
-
-    @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
-    {
+    <center>
         <div>
-            <div>
-                <p>
-                    <a asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
-                </p>
-            </div>
+            <form asp-controller="Admin" asp-action="Search" method="get">
+                <input asp-for="Input" type="text" placeholder="search" /> in
+                <select asp-for="Options">
+                    <option value="user">User</option>
+                    <option value="customer">Customer</option>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
+                    {
+                        <option value="admin">Admin</option>
+                    }
+
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
         </div>
-    }
+    </center>
+    
+    <section class="dashboard-tabs">
+        @if (signInManager.IsSignedIn(User) && User.IsInRole("GrandMaster"))
+        {
+            <a asp-controller="Admin" asp-action="ManageRoles">
+                <div class="shadow-lg rounded">
+                    <p>
+                        Manage Roles
+                    </p>
+                </div>
+            </a>
 
-    <div>
-        <p>
-            <a asp-controller="Admin" asp-action="RegisterUser">Register new User</a>
-        </p>
-    </div>
+        }
+        <a asp-controller="Admin" asp-action="RegisterUser">
+            <div class="shadow-lg rounded">
+                <p> Register new User </p>
+            </div>
+        </a>
 
-    <div>
-        <p>
-            <a asp-controller="Admin" asp-action="RegisterCustomer">Register new Customer</a>
-        </p>
-    </div>
+        <a asp-controller="Admin" asp-action="RegisterCustomer">
+            <div class="shadow-lg rounded">
+                <p> Register new Customer </p>
+            </div>
+        </a>
 
-    <div>
-        <p>
-            <a asp-controller="Admin" asp-action="">Delete/Deactivate User</a>
-        </p>
-    </div>
+        <a asp-controller="Admin" asp-action="">
+            <div class="shadow-lg rounded">
+                <p> Delete/Deactivate User </p>
+            </div>
+        </a>
+            
+    </section>
+    <style>
+        .dashboard-tabs {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            width: 100vw;
+            background-color: aliceblue;
+            justify-items:center;
+        }
+        a:hover {
+            text-decoration: none;
+            background-color: #2733a1;
+        }
+        .rounded {
+            margin: 10vh 0px;
+            width: 30vw;
+            height: 20vh;
+            background-color: ghostwhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: x-large;
+            color: #2733a1;
+        }
+        .rounded:hover{
+            background-color: #2733a1;
+            color: white;
+            font-size: xx-large;
+        }
+        
+    </style>
 
 </main>
+@section scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}
 
+@*
+   Agile methodology
 
+    soap
 
+    Angular
+
+    how do you cope with lagos stress and work?
+
+    Social life    
+
+*@
