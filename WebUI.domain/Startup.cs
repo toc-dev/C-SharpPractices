@@ -46,6 +46,8 @@ namespace WebUI.domain
             services.AddScoped<DbContext, ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IRepository<Account>, Repository<Account>>();
             //services.AddScoped<ICustomerRepository, CustomerRepository>();
             //services.AddScoped<ICustomerService, CustomerService>();
 

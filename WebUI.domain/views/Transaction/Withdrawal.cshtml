@@ -1,0 +1,30 @@
+﻿@model WebUI.domain.Models.WithdrawalViewModel;
+
+@{ ViewData["Title"] = "Withdraw";}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Form</title>
+</head>
+<body>
+    <div>
+        Your account balance is
+    </div>
+    <form method="post">
+        <fieldset>
+            <legend>Withdraw</legend>
+            <div>
+                <label for="AccountNumber">Account Number:</label>
+                <input type="text" name="accountNumber" value="" />
+            </div>
+            <div>
+                <label for="amount">Amount:</label>
+                <input type="text" name="amount" value="" />
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="form-control btn btn-primary submit px-3">Withdraw</button> @*change bg-color*@
+        </div>
+    </form>
+</body>
+</html>

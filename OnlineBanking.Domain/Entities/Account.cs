@@ -22,6 +22,7 @@ namespace OnlineBanking.Domain.Entities
 
         [Column(TypeName = "decimal(38,2)")]
         public decimal Balance { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public DateTime CreatedAt { get; set; } 
 
