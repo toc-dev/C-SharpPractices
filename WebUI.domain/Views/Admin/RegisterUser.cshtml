@@ -1,0 +1,102 @@
+﻿@model WebUI.domain.Models.RegisterUserViewModel;
+
+@{ ViewData["Title"] = "Create User"; }
+
+@section styleLinks{
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/css/loginStyle.css">
+}
+
+<main>
+    <center>
+        <h1 style="background-color:red;">
+            @TempData["Alert"]
+        </h1>
+        <h1 style="background-color:lightgreen;">
+            @TempData["Alert2"]
+        </h1>
+    </center>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">
+                        Register User
+                    </h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">Bank KaTochi <br /> ...your money may be safe with us!</h3>
+                        <form asp-action="RegisterUser" asp-controller="Admin" method="post" autocomplete="on" class="signin-form">
+                            <div asp-validation-summary="All"></div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="FirstName" placeholder="First Name" required />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="LastName" placeholder="Last Name" required />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="tel" asp-for="UserName" placeholder="User name" required />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" asp-for="Email" placeholder="Email" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="tel" asp-for="PhoneNumber" placeholder="PhoneNumber" required />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="date" asp-for="Birthday" placeholder="01/01/1960" required />
+                                <span asp-validation-for="Birthday" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select asp-for="Gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="PreferNotToSay">Prefer not to say</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="number" asp-for="PlotNo" placeholder="House number" value="9" required />
+                                <span asp-validation-for="PlotNo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="StreetName" value="Bezao street" required />
+                                <span asp-validation-for="StreetName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="City" value="Golf City" required />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="State" value="Enugu" required />
+                                <span asp-validation-for="State" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" asp-for="Country" value="Obodo 9ja" required />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Create User</button> @*change bg-color*@
+                            </div>
+                        </form>                                                                                                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/Login.js"></script>
+
+</main>

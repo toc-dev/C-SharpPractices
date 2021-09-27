@@ -15,6 +15,7 @@ namespace WebUI.domain.Services
     {
         static User Onah = new User
         {
+            FullName= "Chidiebube Oanh",
             Email = "theGrandestMaster@bezao.com",
             PhoneNumber = "08034735341",
             UserName = "Onah",
@@ -34,6 +35,7 @@ namespace WebUI.domain.Services
         };
         static User Kachi = new User
         {
+            FullName = "Kennedy Ugwu",
             Email = "kachi@bezao.com",
             PhoneNumber = "08034735340",
             UserName = "Kachii",
@@ -52,6 +54,7 @@ namespace WebUI.domain.Services
         };
         static User Tochi = new User
         {
+            FullName="Tochi Nwokolo",
             Email = "tochi@bezao.com",
             PhoneNumber = "08034735342",
             UserName = "GirlCode",
