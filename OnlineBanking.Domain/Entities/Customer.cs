@@ -11,7 +11,6 @@ namespace OnlineBanking.Domain.Entities
 {
   public  class Customer : IEntity
   {       
-        public int Id { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
      
@@ -21,16 +20,18 @@ namespace OnlineBanking.Domain.Entities
         [MinLength(4)]
         public string LastName { get; set; }
         public int Age { get; set; }
+        public DateTime Birthday { get; set; }
+        public Gender Gender { get; set; }
         public string Nationality { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
 
-        public ICollection<Account> Accounts { get; set; }
+        public Account Account { get; set; }
         public bool DefaultPassword { get; set; }
         public bool IsActive { get; set; }
-
+        public string Id { get; set; }
     }
 
 }

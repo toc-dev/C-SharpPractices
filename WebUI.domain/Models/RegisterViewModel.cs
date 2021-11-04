@@ -10,6 +10,7 @@ namespace WebUI.domain.Models
 {
     public class RegisterViewModel : IEntity
     {
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }

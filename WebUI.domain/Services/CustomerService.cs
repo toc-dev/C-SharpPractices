@@ -1,82 +1,72 @@
 ﻿using OnlineBanking.Domain.Entities;
 using OnlineBanking.Domain.Enumerators;
+using OnlineBanking.Domain.HelperClasses;
 using OnlineBanking.Domain.Interfaces;
+using OnlineBanking.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using WebUI.domain.Interfaces.Services;
+using WebUI.domain.Models;
 using WebUI.domain.Utilities;
 
 namespace WebUI.Domain.Services
 {
-    public class CustomerService
+    public class CustomerService: ICustomerService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerService(IUnitOfWork unitOfWork)
+        public CustomerService(IUnitOfWork unitOfWork, ICustomerRepository customerRepository)
         {
             _unitOfWork = unitOfWork;
+            _customerRepository = customerRepository;
+
         }
 
-       /* public int CreateCustomer(RegisterCustomerViewModel model, bool IsUserExist)
+        public int? Add(Customer customer)
         {
+            _customerRepository.Add(customer);
+            int? result = _unitOfWork.Commit();
+            return result;
+
+        }
+
+        public (bool isAboveMinAge, int AffectedRows) Add(RegisterUserViewModel registerUser)
+        {
+            int AffectedRows = default;
+            var isAgeValid = ValidateAge.IsAgeValid(registerUser.Birthday.Value);
             var customer = new Customer
             {
-                //FirstName = model.FirstName,
-                //LastName = model.LastName,
-                //Age = model.Age,
-                //Nationality = model.Country,
-                //CreatedAt = DateTime.Now,
-                //CreatedBy = "Admin Name",
-                //Account = new Account
-                //{
-                //    AccountNumber = int.Parse(Tools.GenerateAccountNumber()),
-                //    AccountType = model.AccountType,
-                //    CreatedAt = DateTime.Now,
-                //    CreatedBy = "Admin"
-                //}
+                UserId = registerUser.Id,
+                Birthday = registerUser.Birthday.Value,
+                Gender = registerUser.Gender,
+                Account = new Account
+                {
+                    AccountType = registerUser.AccountType,
+                    AccountNumber = Convert.ToInt32(AccountNumberGenerator.RandomAccountNumber(10000000, 99999999)),
+                    CreatedBy = registerUser.CreatedBy,
+                    CreatedAt = DateTime.Now,
+                    Balance = registerUser.AccountType != AccountType.Student ? 0 : 5000,
+                    IsActive = true
+
+                },
             };
-            // if customer already exists, then indicate  that the password default is false. it is set to true in the customer entity class
-            /* if (IsUserExist)
-                 customer.DefaultPassword = false;
+            _customerRepository.Add(customer);
+            AffectedRows = _unitOfWork.Commit();
+            return (isAgeValid, AffectedRows);
+        }
 
-             if (model.AccountType == (AccountType)1)
-                 customer.Account.Balance = 5000;
-             else
-                 customer.Account.Balance = 0;
+        public Customer GetCustomer(string userId)
+        {
+            return _customerRepository.Find(a => a.Id == userId).FirstOrDefault();
+        }
 
-             _unitOfWork.Customers.Add(customer);
-             _unitOfWork.Commit();
-
-             return customer.Account.AccountNumber;
-         }*/
-
-            /*public Customer Get(int Id)
-            {
-                Customer customer = null;
-                try
-                {
-                    customer = _unitOfWork.Customers.Get(Id);
-                }
-                catch
-                {
-                    return customer;
-                }
-                return customer;
-            }
-
-
-
-            public int Update(UpdateViewModel model, int Id)
-            {
-                int updatedRow = 0;
-                var customer = _unitOfWork.Customers.Get(Id);
-                customer.FirstName = model.FirstName ??= customer.FirstName;
-                customer.LastName = model.LastName ??= customer.LastName;
-                updatedRow = _unitOfWork.Commit();
-                return updatedRow;
-            
-        }*/
-        
+        public Customer GetCustomerAccount(string accountId)
+        {
+            return _customerRepository.Find(a => a.Account.Id.ToString() == accountId).FirstOrDefault();
+        }
     }
 }

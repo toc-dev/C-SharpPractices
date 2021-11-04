@@ -1,4 +1,5 @@
 ﻿using OnlineBanking.Domain.Entities;
+using OnlineBanking.Domain.Enumerators;
 using OnlineBanking.Domain.Interfaces;
 using OnlineBanking.Domain.Interfaces.Repositories;
 using System;
@@ -26,7 +27,26 @@ namespace WebUI.domain.Services
         }
         public (bool success, string message) Deposit(DepositViewModel model)
         {
-            var account = _accountService.Get(model.customer.AccountId);
+            var account = _accountService.Get(model.Customer.Account.Id);
+            var isValidAccount = account != null;
+            var isActiveAccount = account?.IsActive;
+
+            if (!isValidAccount || !isActiveAccount.Value)
+            {
+                var message = !isActiveAccount.Value ? "Account is inactive. Please reactivate" : "Your account is in invalid, please create an account";
+                return (false, message);
+            }
+            account.Balance += model.Amount;
+            var transaction = new Transaction
+            {
+                Amount = model.Amount,
+                TimeStamp = DateTime.Now,
+                TransactionType = TransactionType.Credit,
+                UserId = model.Customer.UserId
+            };
+            _transactionRepository.Add(transaction);
+            var affectedRows = _unitOfWork.Commit();
+            return affectedRows > 0 ? (true, "Deposit successful!") : (false, "An error occured! Try again");
 
         }
 
@@ -37,7 +57,8 @@ namespace WebUI.domain.Services
 
         public (bool success, string message) Transfer(TransferViewModel model)
         {
-            throw new NotImplementedException();
+            var senderAccount = _accountService.Get(model.Customer.Account.Id);
+            var recipient
         }
 
         public (bool success, string message) Withdrawal(WithdrawalViewModel model)

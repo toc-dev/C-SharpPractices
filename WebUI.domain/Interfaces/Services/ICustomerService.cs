@@ -10,7 +10,7 @@ namespace WebUI.domain.Interfaces.Services
     public interface ICustomerService
     {
         int? Add(Customer customer);
-        public (bool isAboveMinAge, bool isAboveMaxAge, int AffectedRows) Add(RegisterUserViewModel registerUser);
+        public (bool isAboveMinAge, int AffectedRows) Add(RegisterUserViewModel registerUser);
         public Customer GetCustomer(string userId);
         public Customer GetCustomerAccount(string accountId);
     }

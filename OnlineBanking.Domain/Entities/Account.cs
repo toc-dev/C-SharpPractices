@@ -11,7 +11,7 @@ namespace OnlineBanking.Domain.Entities
    public class Account: IEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
